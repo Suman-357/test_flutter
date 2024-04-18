@@ -3,7 +3,6 @@ import './App.css'
 
 const FloatingForm = () => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
