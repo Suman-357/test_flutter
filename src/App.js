@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'
 
-function App() {
+const FloatingForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="floating-form-container">
+      {!submitted ? (
+        <form className="floating-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="tel"
+              id="name"
+              maxLength={10}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <label htmlFor="name">Phone Number</label>
+          </div>
+          <button type="submit" className="submit-btn">
+            Submit
+          </button>
+        </form>
+      ) : (
+        <div className="submitted-values">
+          <h2>Submitted Values:</h2>
+          <p>Name: {name}</p>
+          <p>Email: {email}</p>
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default App;
+export default FloatingForm;
